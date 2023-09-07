@@ -1,0 +1,15 @@
+/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/bin/Debug/net7.0/SIR
+/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/bin/Debug/net7.0/SIR.deps.json
+/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/bin/Debug/net7.0/SIR.runtimeconfig.json
+/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/bin/Debug/net7.0/SIR.dll
+/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/bin/Debug/net7.0/SIR.pdb
+/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/obj/Debug/net7.0/SIR.csproj.AssemblyReference.cache
+/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/obj/Debug/net7.0/SIR.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/obj/Debug/net7.0/SIR.AssemblyInfoInputs.cache
+/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/obj/Debug/net7.0/SIR.AssemblyInfo.cs
+/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/obj/Debug/net7.0/SIR.csproj.CoreCompileInputs.cache
+/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/obj/Debug/net7.0/SIR.dll
+/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/obj/Debug/net7.0/refint/SIR.dll
+/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/obj/Debug/net7.0/SIR.pdb
+/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/obj/Debug/net7.0/SIR.genruntimeconfig.cache
+/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/obj/Debug/net7.0/ref/SIR.dll
