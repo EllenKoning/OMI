@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/SIR.csproj": {}
+    "/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR model/SIR/SIR.csproj": {}
   },
   "projects": {
-    "/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/SIR.csproj": {
+    "/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR model/SIR/SIR.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/SIR.csproj",
+        "projectUniqueName": "/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR model/SIR/SIR.csproj",
         "projectName": "SIR",
-        "projectPath": "/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/SIR.csproj",
+        "projectPath": "/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR model/SIR/SIR.csproj",
         "packagesPath": "/Users/ellenkoning/.nuget/packages/",
-        "outputPath": "/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR/SIR/obj/",
+        "outputPath": "/Users/ellenkoning/Documents/UU/Year_3/OMI/SIR model/SIR/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ellenkoning/.nuget/NuGet/NuGet.Config"
