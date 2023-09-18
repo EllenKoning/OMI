@@ -1,17 +1,29 @@
 ﻿using System;
+using System.IO;
+
 class Model
 {
-    decimal nr_Susceptible = 999999;
+    bool save = true;
+    string path = "../../../../raw_data/data.txt";
+    
+
+    decimal nr_Susceptible = 100;
     //decimal[] infectionStages = new decimal[5] { 1,0,0,0,0 };
-    decimal nr_Dead;
+    decimal nr_Dead = 0;
     decimal nr_Infected = 1;
     int stage = 0;
     decimal nr_Recovered = 0;
-    long population;
+    decimal population;
     decimal recovery_chance = 0.1m;
     decimal death_chance = 0.001m;
     decimal vacination_Protection = 0.8m;
     decimal vacination_Rate = 0.9m;
+    decimal birth_Rate = 0.00001m;
+
+    decimal[] SIRD
+    {
+        get { return new decimal[4] { nr_Susceptible, nr_Infected, nr_Recovered, nr_Dead }; }
+    }
 
     //decimal nr_Infected {
     //    get {
@@ -25,36 +37,43 @@ class Model
     //}
 
 
-    decimal std_InfectionRate = 0.1m;
+    decimal std_InfectionRate = 0.5m;
     int farContact = 35; //same room. half the infection rate?
     int closeContact = 10; //sharing personal space
-    decimal hygieneFactor = 0.5m; //multiply by this factor
+    decimal hygiene_Protection = 0.5m; //multiply by this factor
+    decimal hygiene_Rate = 0.9m;
 
     public Model()
     {
-        population = (long) (nr_Susceptible + nr_Infected + nr_Recovered);
+        if (save)
+            clearData();
         for (int i = 0; i < 100; i++)
         {
+            if (save)
+                saveData(SIRD);
             updateStats();
             printStats(i);
         }
-        Console.WriteLine(nr_Susceptible + nr_Infected + nr_Recovered);
+        Console.WriteLine(nr_Susceptible + nr_Infected + nr_Recovered + nr_Dead);
         Console.ReadLine();
     }
 
     void updateStats()
     {
-  
+        population = nr_Susceptible + nr_Infected + nr_Recovered;
+        decimal added_Susceptible = population * birth_Rate;
         decimal totalContact = (farContact / 2 + closeContact);
         decimal chanceOfCarrier = nr_Infected / population;
-        decimal vacination_Factor = (1 - vacination_Protection) * (1 - vacination_Rate); // no idea
-        decimal chanceOfInfection = 1 - (decimal)Math.Pow((double)( 1 - chanceOfCarrier * std_InfectionRate * hygieneFactor), (double)totalContact); //make not double pls
+        decimal vacination_Factor = 1 - vacination_Protection * vacination_Rate;
+        decimal hygiene_Factor = 1 - hygiene_Protection * hygiene_Rate;
+        decimal chanceOfInfection = 1 - (decimal)Math.Pow((double)( 1 - chanceOfCarrier * std_InfectionRate * vacination_Factor * hygiene_Factor ), (double)totalContact); //make not double pls
         decimal added_Infected =  chanceOfInfection * nr_Susceptible;
         decimal added_Recovered = nr_Infected * recovery_chance;
         decimal added_Dead = nr_Infected * death_chance;
 
 
         nr_Susceptible -= added_Infected;
+        nr_Susceptible += added_Susceptible;
         nr_Infected += added_Infected;
         nr_Infected -= added_Recovered;
         nr_Infected -= added_Dead;
@@ -100,4 +119,51 @@ class Model
     //    Infected,
     //    Recovered
     //}
+
+    void clearData()
+    {
+        try
+        {
+            File.WriteAllText(path, String.Empty);
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        finally
+        {
+            Console.WriteLine("cleared data in " + path);
+        }
+    }
+
+    void saveData(decimal[] stats)
+    {
+        try
+        {
+            string line = "";
+            for(int i  = 0; i < stats.Length; i++)
+            {
+                line += stats[i].ToString() + ",";
+            }
+            line.Remove(line.Length - 1, 1);
+            //Pass the filepath and filename to the StreamWriter Constructor
+            using (StreamWriter sw = File.AppendText(path)) 
+            {
+                //Write a line of text
+                sw.WriteLine(line);
+                //Close the file
+                sw.Close();
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Exception: " + e.Message);
+        }
+        finally
+        {
+            Console.WriteLine("Executing finally block.");
+        }
+    }
 }
+
+
