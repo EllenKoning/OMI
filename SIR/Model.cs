@@ -3,9 +3,10 @@ using System.IO;
 
 class Model
 {
+    Filer filer;
     bool save = true;
-    string path = "../../../../raw_data/data.txt";
-    
+
+
 
     decimal nr_Susceptible = 100;
     //decimal[] infectionStages = new decimal[5] { 1,0,0,0,0 };
@@ -43,14 +44,19 @@ class Model
     decimal hygiene_Protection = 0.5m; //multiply by this factor
     decimal hygiene_Rate = 0.9m;
 
-    public Model()
+    public Model(Filer filer)
+    {
+        this.filer = filer;
+    }
+
+    public void run(int n)
     {
         if (save)
-            clearData();
-        for (int i = 0; i < 100; i++)
+            filer.clearData();
+        for (int i = 0; i < n; i++)
         {
             if (save)
-                saveData(SIRD);
+                filer.saveData(SIRD);
             updateStats();
             printStats(i);
         }
@@ -66,8 +72,8 @@ class Model
         decimal chanceOfCarrier = nr_Infected / population;
         decimal vacination_Factor = 1 - vacination_Protection * vacination_Rate;
         decimal hygiene_Factor = 1 - hygiene_Protection * hygiene_Rate;
-        decimal chanceOfInfection = 1 - (decimal)Math.Pow((double)( 1 - chanceOfCarrier * std_InfectionRate * vacination_Factor * hygiene_Factor ), (double)totalContact); //make not double pls
-        decimal added_Infected =  chanceOfInfection * nr_Susceptible;
+        decimal chanceOfInfection = 1 - (decimal)Math.Pow((double)(1 - chanceOfCarrier * std_InfectionRate * vacination_Factor * hygiene_Factor), (double)totalContact); //make not double pls
+        decimal added_Infected = chanceOfInfection * nr_Susceptible;
         decimal added_Recovered = nr_Infected * recovery_chance;
         decimal added_Dead = nr_Infected * death_chance;
 
@@ -79,9 +85,9 @@ class Model
         nr_Infected -= added_Dead;
         nr_Recovered += added_Recovered;
         nr_Dead += added_Dead;
-        
-        
-        
+
+
+
         //nr_Susceptible = (nr_Susceptible < 0) ? 0 : nr_Susceptible;
 
         //infectionStages[stage] = added_Infected;
@@ -102,7 +108,7 @@ class Model
         Console.WriteLine($"D: {nr_Dead}");
         Console.WriteLine("-------------------------------------\n");
 
-       
+
     }
 
 
@@ -120,50 +126,7 @@ class Model
     //    Recovered
     //}
 
-    void clearData()
-    {
-        try
-        {
-            File.WriteAllText(path, String.Empty);
-        }
-        catch(Exception e)
-        {
-            Console.WriteLine(e);
-        }
-        finally
-        {
-            Console.WriteLine("cleared data in " + path);
-        }
-    }
 
-    void saveData(decimal[] stats)
-    {
-        try
-        {
-            string line = "";
-            for(int i  = 0; i < stats.Length; i++)
-            {
-                line += stats[i].ToString() + ",";
-            }
-            line.Remove(line.Length - 1, 1);
-            //Pass the filepath and filename to the StreamWriter Constructor
-            using (StreamWriter sw = File.AppendText(path)) 
-            {
-                //Write a line of text
-                sw.WriteLine(line);
-                //Close the file
-                sw.Close();
-            }
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("Exception: " + e.Message);
-        }
-        finally
-        {
-            Console.WriteLine("Executing finally block.");
-        }
-    }
 }
 
 
