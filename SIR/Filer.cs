@@ -1,12 +1,13 @@
 using System.IO;
 class Filer
 {
-    const string id_Path = "../../../../raw_data/id.txt";
+    readonly string id_Path;
     readonly string path;
     int id = 0;
 
     public Filer(string path)
     {
+        id_Path = path + "id.txt";
         getID();
         this.path = formatFileName(path);
         updateID();
@@ -30,7 +31,7 @@ class Filer
             path += "00";
         else if (id < 100)
             path += "0";
-        path += id.ToString() + ".txt";
+        path += id.ToString() + ".csv";
         return path;
     }
     private void getID()

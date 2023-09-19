@@ -4,12 +4,8 @@ using System.IO;
 class Model
 {
     Filer filer;
-    bool save = true;
-
-
 
     decimal nr_Susceptible = 100;
-    //decimal[] infectionStages = new decimal[5] { 1,0,0,0,0 };
     decimal nr_Dead = 0;
     decimal nr_Infected = 1;
     int stage = 0;
@@ -20,36 +16,31 @@ class Model
     decimal vacination_Protection = 0.8m;
     decimal vacination_Rate = 0.9m;
     decimal birth_Rate = 0.00001m;
-
-    decimal[] SIRD
-    {
-        get { return new decimal[4] { nr_Susceptible, nr_Infected, nr_Recovered, nr_Dead }; }
-    }
-
-    //decimal nr_Infected {
-    //    get {
-    //        decimal sum = 0;
-    //        for (int i = 0; i < infectionStages.Length; i++)
-    //        {
-    //            sum += infectionStages[i];
-    //        }
-    //        return sum;
-    //    }
-    //}
-
-
     decimal std_InfectionRate = 0.5m;
     int farContact = 35; //same room. half the infection rate?
     int closeContact = 10; //sharing personal space
     decimal hygiene_Protection = 0.5m; //multiply by this factor
     decimal hygiene_Rate = 0.9m;
 
+
+    decimal[] SIRD
+    {
+        get { return new decimal[4] { nr_Susceptible, nr_Infected, nr_Recovered, nr_Dead }; }
+    }
+
+
+    
     public Model(Filer filer)
     {
         this.filer = filer;
     }
 
-    public void run(int n)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="n">number of days</param>
+    /// <param name="save">save raw data to csv file</param>
+    public void run(int n, bool save)
     {
         if (save)
             filer.clearData();
