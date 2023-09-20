@@ -13,6 +13,9 @@ class Filer
         updateID();
     }
 
+    /// <summary>
+    /// updates the id and writes to file to store
+    /// </summary>
     public void updateID()
     {
         id++;
@@ -22,8 +25,12 @@ class Filer
             sw.Close();
         }
     }
-    public void convertToCsv() { }
 
+    /// <summary>
+    /// file name formating to add 0s etc for convennience when sorting files
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
     public string formatFileName(string path)
     {
         path += "data_";
@@ -34,6 +41,10 @@ class Filer
         path += id.ToString() + ".csv";
         return path;
     }
+
+    /// <summary>
+    /// Gets ID from file. If no such file excists a file is created.
+    /// </summary>
     private void getID()
     {
         try
@@ -74,22 +85,10 @@ class Filer
         }
     }
 
-    public void clearData()
-    {
-        try
-        {
-            File.WriteAllText(path, String.Empty);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
-        finally
-        {
-            Console.WriteLine("cleared data in " + path);
-        }
-    }
-
+    /// <summary>
+    /// stores data to a file with the id as written in id.txt
+    /// </summary>
+    /// <param name="stats"></param>
     public void saveData(decimal[] stats)
     {
         string line = "";
