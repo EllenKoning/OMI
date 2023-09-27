@@ -37,6 +37,32 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Csv": {
+              "target": "Package",
+              "version": "[2.0.93, )"
+            },
+            "CsvHelper": {
+              "target": "Package",
+              "version": "[30.0.1, )"
+            },
+            "Plotly.NET": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "Plotly.NET.CSharp": {
+              "target": "Package",
+              "version": "[0.11.1, )"
+            },
+            "Plotly.NET.ImageExport": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "Plotly.NET.Interactive": {
+              "target": "Package",
+              "version": "[4.2.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -53,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.302/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.308/RuntimeIdentifierGraph.json"
         }
       }
     }
