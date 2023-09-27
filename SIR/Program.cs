@@ -1,4 +1,7 @@
-﻿string path = "../../../../../data/";
+﻿
+string path = "../../../../data/";
 Filer filer = new Filer(path);
-Model model = new Model(filer, new Demographic(), new Disease());
-model.run(250, false);
+Demographic demographic = new Demographic();
+Disease disease = new Disease();
+Model model = new Model(filer, demographic, disease);
+model.run(500, false);

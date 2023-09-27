@@ -5,11 +5,11 @@ public class Disease
 {
     // no touchie
     // protections
-    public readonly decimal vacination_Protection = 0.95m;
-    public readonly decimal vacination_Rate = 0.9m;
+    public readonly decimal vacination_Protection;
+    public readonly decimal vacination_Rate;
 
-    public readonly decimal hygiene_Protection = 0.3m;
-    public readonly decimal hygiene_Rate = 0.3m;
+    public readonly decimal hygiene_Protection;
+    public readonly decimal hygiene_Rate;
 
 
     // not touchie
