@@ -5,12 +5,18 @@ class Filer
     readonly string path;
     int id = 0;
 
-    public Filer(string path)
+    public Filer(string _path)
     {
-        id_Path = path + "id.txt";
+        id_Path = _path + "id.txt";
         getID();
-        this.path = formatFileName(path);
+        path = formatFileName(_path);
         updateID();
+
+        using (StreamWriter sw = new StreamWriter(path))
+        {
+            sw.WriteLine(";Susceptible;Infetcted;Recovered;Dead");
+            sw.Close();
+        }
     }
 
     /// <summary>
@@ -33,7 +39,7 @@ class Filer
     /// <returns></returns>
     public string formatFileName(string path)
     {
-        path += "data_";
+        path += "raw_data/data_";
         if (id < 10)
             path += "00";
         else if (id < 100)
@@ -85,18 +91,14 @@ class Filer
         }
     }
 
-    /// <summary>
-    /// stores data to a file with the id as written in id.txt
-    /// </summary>
-    /// <param name="stats"></param>
-    public void saveData(decimal[] stats)
+
+    public void saveData(decimal[] stats, int n)
     {
-        string line = "";
+        string line = n.ToString();
         for (int i = 0; i < stats.Length; i++)
         {
-            line += stats[i].ToString() + ",";
+            line += ";" + (stats[i].ToString()).Replace('.', ',') ;
         }
-        line.Remove(line.Length - 1, 1);
         try
         {
             //Pass the filepath and filename to the StreamWriter Constructor
@@ -114,7 +116,7 @@ class Filer
             {
                 using (StreamWriter sw = File.CreateText(id_Path))
                 {
-                    sw.WriteLine(line);
+                    sw.WriteLine("\" \",\"R\",\"S\",\"I\",\"D\"\n" + line);
                     sw.Close();
                 }
             }
