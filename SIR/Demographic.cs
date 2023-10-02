@@ -11,6 +11,8 @@ public class Demographic
     public readonly decimal birth_Chance;// = 0.00001m;
     public readonly decimal std_Infection_Chance;// = 0.02m;
 
+    public readonly decimal vacination_Rate;
+
     // contact per day
     public readonly int far_Contact;// = 35; //same room. half the infection rate?
     public readonly int close_Contact;// = 10; //sharing personal space
