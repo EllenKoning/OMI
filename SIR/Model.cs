@@ -57,11 +57,10 @@ class Model
 
 
         // Calculating all the shifts in population
-        decimal added_Dead = nr_Infected * demographic.death_Chance;
-        //decimal added_Susceptible = population * person.birth_Chance;
+        decimal added_Dead = nr_Infected * demographic.death_Chance + demographic.recovery_Chance * nr_Infected * disease.death_Chance;
+        decimal added_Susceptible = population * demographic.birth_Chance;
         decimal added_Infected = infection_Chance * nr_Susceptible;
-        decimal added_Recovered = demographic.recovery_Chance * nr_Infected;
-
+        decimal added_Recovered = demographic.recovery_Chance * nr_Infected * (1 - disease.death_Chance);
         
         // Updating all the variables of the population
         nr_Susceptible -= added_Infected;
@@ -69,7 +68,7 @@ class Model
         nr_Infected += added_Infected;
         nr_Infected -= added_Recovered;
         nr_Infected -= added_Dead;
-        nr_Recovered += added_Recovered;
+        nr_Recovered += added_Recovered ;
         nr_Dead += added_Dead;
 
     }

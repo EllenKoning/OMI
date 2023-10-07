@@ -26,16 +26,17 @@ public class Demographic
     public readonly decimal total_Contact;
 
     public Demographic(decimal avg_recovery_days = 5
-                      ,decimal _death_Chance = 0.001m
-                      ,decimal _birth_Chance = 0.0001m
-                      ,decimal _std_Infection_Chance = 0.1m
+                      , decimal death_Rate_Per_Year_Per_Thousand = 9.81m //https://www.macrotrends.net/countries/NLD/netherlands/death-rate
+                      , decimal birth_Rate_Per_Year_Per_Thousand = 10.82m //https://www.macrotrends.net/countries/NLD/netherlands/birth-rate
+                      , decimal _std_Infection_Chance = 0.1m
                       ,int _far_Contact = 50
                       ,int _close_Contact = 10
                       )
     {
+        int DAYS_OF_THE_YEAR = 365;
         recovery_Chance = 1/avg_recovery_days;
-        death_Chance = _death_Chance;
-        birth_Chance = _birth_Chance;
+        death_Chance = death_Rate_Per_Year_Per_Thousand / (DAYS_OF_THE_YEAR * 1000);
+        birth_Chance = birth_Rate_Per_Year_Per_Thousand / (DAYS_OF_THE_YEAR * 1000);
         std_Infection_Chance = _std_Infection_Chance;
         far_Contact = _far_Contact;
         close_Contact = _close_Contact;
