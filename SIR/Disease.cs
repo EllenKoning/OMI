@@ -5,6 +5,7 @@ public class Disease
 {
     // no touchie
     // protections
+
     private readonly decimal vacination_Protection;
     private readonly decimal vacination_Rate;
 
