@@ -64,7 +64,7 @@ class Model
         
         // Updating all the variables of the population
         nr_Susceptible -= added_Infected;
-        //nr_Susceptible += added_Susceptible;
+        nr_Susceptible += added_Susceptible;
         nr_Infected += added_Infected;
         nr_Infected -= added_Recovered;
         nr_Infected -= added_Dead;
