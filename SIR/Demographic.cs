@@ -6,7 +6,8 @@ public class Demographic
     public readonly int age;
 
     // spontaneous chances
-    
+    public readonly decimal expected_Recovery_Time;
+
     public readonly decimal death_Chance;// = 0.1m;
     public readonly decimal birth_Chance;// = 0.00001m;
     public readonly decimal std_Infection_Chance;// = 0.02m;
@@ -25,7 +26,7 @@ public class Demographic
     // no touchie
     public readonly decimal total_Contact;
 
-    public Demographic(decimal avg_recovery_days = 5
+    public Demographic(decimal _expected_Recovery_Time = 5
                       , decimal death_Rate_Per_Year_Per_Thousand = 9.81m //https://www.macrotrends.net/countries/NLD/netherlands/death-rate
                       , decimal birth_Rate_Per_Year_Per_Thousand = 10.82m //https://www.macrotrends.net/countries/NLD/netherlands/birth-rate
                       , decimal _std_Infection_Chance = 0.1m
@@ -34,7 +35,8 @@ public class Demographic
                       )
     {
         int DAYS_OF_THE_YEAR = 365;
-        recovery_Chance = 1/avg_recovery_days;
+        expected_Recovery_Time = _expected_Recovery_Time;
+        recovery_Chance = 1/ _expected_Recovery_Time;
         death_Chance = death_Rate_Per_Year_Per_Thousand / (DAYS_OF_THE_YEAR * 1000);
         birth_Chance = birth_Rate_Per_Year_Per_Thousand / (DAYS_OF_THE_YEAR * 1000);
         std_Infection_Chance = _std_Infection_Chance;
@@ -42,6 +44,6 @@ public class Demographic
         close_Contact = _close_Contact;
 
 
-        total_Contact = (far_Contact / (decimal) 3) + close_Contact;
+        total_Contact = (far_Contact / (decimal) 4) + close_Contact;
     }
 }

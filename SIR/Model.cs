@@ -7,7 +7,7 @@ class Model
     Filer filer;
     Demographic demographic;
     Disease disease;
-
+    Policies policies;
 
     ///start values population
     decimal population;
@@ -15,19 +15,24 @@ class Model
     decimal nr_Infected = 1;
     decimal nr_Recovered = 0;
     decimal nr_Dead = 0;
+    decimal carrier_Density = 0;
 
     decimal infection_Chance;
 
     decimal[] SIRD
     {
-        get { return new decimal[4] { nr_Susceptible, nr_Infected, nr_Recovered, nr_Dead }; }
+        get { return new decimal[5] { nr_Susceptible, nr_Infected, nr_Recovered, nr_Dead, carrier_Density }; }
     }
 
-    public Model(Filer _filer, Demographic _demographic, Disease _disease)
+    public Model(Filer _filer, Demographic _demographic, Disease _disease, Policies _policies)
     {
         filer = _filer;
         demographic = _demographic;
         disease = _disease;
+        policies = _policies;
+
+        decimal stochastic_Rate = demographic.std_Infection_Chance * demographic.total_Contact * demographic.expected_Recovery_Time;
+        Console.WriteLine(stochastic_Rate);
         //plotter = new Plotter();
     }
 
@@ -52,9 +57,9 @@ class Model
     void updateStats()
     {
         population = nr_Susceptible + nr_Infected + nr_Recovered;
-        decimal disease_Carrier_Chance = nr_Infected / population;
-        infection_Chance = 1 - (decimal)Math.Pow((double)(1 - disease_Carrier_Chance * demographic.std_Infection_Chance * disease.vacination_Factor * disease.hygiene_Factor), (double)demographic.total_Contact); //make not double pls
-
+        carrier_Density = nr_Infected / population;
+        decimal not_Infection_Chance = (decimal)Math.Pow((double)(1 - (carrier_Density * demographic.std_Infection_Chance * disease.vacination_Factor * disease.hygiene_Factor)), (double)demographic.total_Contact * (double)((nr_Infected / population > 0.05m) ? policies.social_Isolation_Factor : 1)); //make not double pls
+        infection_Chance = 1 - not_Infection_Chance;
 
         // Calculating all the shifts in population
         decimal added_Dead = nr_Infected * demographic.death_Chance + demographic.recovery_Chance * nr_Infected * disease.death_Chance;
