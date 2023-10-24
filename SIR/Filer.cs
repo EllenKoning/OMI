@@ -14,7 +14,7 @@ class Filer
 
         using (StreamWriter sw = new StreamWriter(path))
         {
-            sw.WriteLine(";Susceptible;Infetcted;Recovered;Dead;Density;Stochastic");
+            sw.WriteLine(";Susceptible;Infetcted;Recovered;Dead;Deaths/day;Carrier density;Reproduction number;Stochastic rate");
             sw.Close();
         }
     }
